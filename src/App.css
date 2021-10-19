@@ -1,5 +1,22 @@
+body {
+  color: whitesmoke;
+}
+
+form {
+  display:flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  max-width: 400px;
+}
+form label {
+  display: flex;
+  flex-direction: column;
+  margin: .5rem;
+}
 .App {
   text-align: center;
+  background-color: #282c34;
 }
 
 .App-logo {
@@ -7,15 +24,9 @@
   pointer-events: none;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
 .App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+  background-color: #485264;
+  min-height: 100px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -28,11 +39,9 @@
   color: #61dafb;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.test-comp-1 {
+  display: flex;
+  flex-direction: column;
+  min-height: 100px;
+  align-items: center;
 }
