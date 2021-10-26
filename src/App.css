@@ -39,7 +39,7 @@ form label {
   color: #61dafb;
 }
 
-.test-comp-1 {
+.auth {
   display: flex;
   flex-direction: column;
   min-height: 100px;

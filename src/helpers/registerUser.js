@@ -8,14 +8,6 @@ export default async function registerUser(
     acceptTerms
 ) {
     try {
-        console.log({
-            firstName,
-            lastName,
-            email,
-            password,
-            confirmPassword,
-            acceptTerms
-        })
         let res = await fetch(`${process.env.REACT_APP_API_URL}/Accounts/register`, {
             method: "POST",
             body: JSON.stringify({

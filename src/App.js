@@ -1,4 +1,4 @@
-import {RegisterUser} from './auth'
+import {Auth} from './auth'
 import './App.css';
 
 function App() {
@@ -6,7 +6,7 @@ function App() {
     <div className="App">
       <header className="App-header">
       <h1>App Component</h1>
-      <RegisterUser />
+      <Auth />
       </header>
     </div>
   );

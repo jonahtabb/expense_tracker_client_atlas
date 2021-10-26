@@ -10,7 +10,7 @@ const registrationFormFields = [
     {propName: "acceptTerms", label: "Accept Terms", type:"checkbox" }
 ]
     
-export default function TestComp1(){
+export default function RegisterUser(){
 
     const [state, setState] = useState({
         firstName: "",
@@ -24,7 +24,7 @@ export default function TestComp1(){
     const handleUpdateInput = (e) => {
         const target = e.target ;
         const fieldValue = target.type === 'checkbox' ? target.checked : target.value ;
-        const fieldName = e.target.name ;
+        const fieldName = target.name ;
         
         setState((prevState) => ({
             ...prevState,
@@ -54,9 +54,9 @@ export default function TestComp1(){
     }
 
     return(
-        <div className="test-comp-1">
+        <div className="auth">
             <h2>Register</h2>
-            <form onSubmit={(e) => {e.preventDefault(); handleSubmit()} }>
+            <form onSubmit={(e) => {e.preventDefault(); handleSubmit(e)} }>
                 {
                     registrationFormFields.map((field => (
                         <label key={field.propName}>
