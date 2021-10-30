@@ -6,7 +6,8 @@ const loginFormFields = [
     {propName: "password", label: "Password", type: "text"}
 ]
 
-export default function Loginuser(){
+export default function LoginUser(props){
+    const {updateToken} = props;
     const [state, setState] = useState({
         email: "",
         password: ""
@@ -27,7 +28,23 @@ export default function Loginuser(){
         const {email, password} = state
 
         let res = await loginUser(email, password)
-        console.log(res)
+
+        if (res instanceof Error){
+            console.error(res)
+        } else {
+            console.log(await res)
+            const token = await res.jwtToken;
+            console.log(token)
+            localStorage.setItem("token", token)
+            updateToken(token)
+            setState({
+                email: '',
+                password:''
+            })
+        }
+
+        
+        
     }
 
     return(

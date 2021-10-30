@@ -51,6 +51,15 @@ export default function RegisterUser(){
             acceptTerms
         )
         console.log(res)
+
+        setState({
+            firstName: "",
+            lastName: "",
+            email: "",
+            password: "",
+            confirmPassword: "",
+            acceptTerms: false
+        })
     }
 
     return(

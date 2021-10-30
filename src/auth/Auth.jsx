@@ -2,7 +2,8 @@ import { useState } from "react";
 import {LoginUser, RegisterUser} from "."
 
 
-export default function Auth(){
+export default function Auth(props){
+    const {updateToken} = props
     const [authType, setAuthType] = useState("register")
 
     return (
@@ -23,6 +24,7 @@ export default function Auth(){
                     <LoginUser 
                         authType={authType}
                         setAuthType={setAuthType}
+                        updateToken={updateToken}
                     />
 
                 </>
