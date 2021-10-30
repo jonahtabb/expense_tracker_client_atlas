@@ -1,5 +1,6 @@
 import {registerUser} from '../helpers'
 import { useState } from "react"
+import { FormGroup, TextField, FormControlLabel, Checkbox, Button } from '@mui/material'
 
 const registrationFormFields = [
     {propName: "firstName", label: "First Name", type: "text"},
@@ -18,7 +19,7 @@ export default function RegisterUser(){
         email: "",
         password: "",
         confirmPassword: "",
-        acceptTerms: false
+        acceptTerms: true
     })
 
     const handleUpdateInput = (e) => {
@@ -67,20 +68,41 @@ export default function RegisterUser(){
             <h2>Register</h2>
             <form onSubmit={(e) => {e.preventDefault(); handleSubmit(e)} }>
                 {
-                    registrationFormFields.map((field => (
-                        <label key={field.propName}>
-                            {field.label}
-                            <input 
+                    registrationFormFields.map((field => 
+                    {
+                        if(field.type === "text") {
+                            return(
+                                <TextField
+                                key={field.propName}
+                                id="outlined-basic"
+                                label={field.label}
+                                variant="outlined"
+                                margin="normal"
                                 type={field.type}
                                 name={field.propName}
                                 value={state[field.propName]}
                                 onChange={(e) => handleUpdateInput(e)}
                                 required
                             />
-                        </label>
-                    )))
+                            )
+                        } else {
+                            return(
+                                <FormGroup key={field.propName}>
+                                    <FormControlLabel 
+                                        control={<Checkbox defaultChecked onClick={(e) => handleUpdateInput(e)}/>} 
+                                        label={field.label}
+                                    />
+                                </FormGroup>
+                            )
+                        }
+
+                    }
+
+                       
+                    
+                    ))
                 }         
-                <button type="submit">Register</button>
+                <Button type="submit" variant="contained">Register</Button>
             </form>
         </div>
     )

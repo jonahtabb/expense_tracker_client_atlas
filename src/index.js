@@ -5,14 +5,18 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { Router } from 'react-router-dom';
 import { createBrowserHistory } from 'history';
+import { ThemeProvider } from '@emotion/react';
+import theme from './MuiTheme'
 
 const history = createBrowserHistory()
 
-
+console.log(theme)
 ReactDOM.render(
   <React.StrictMode>
     <Router history={history}>
-      <App />
+      <ThemeProvider theme={theme}>
+        <App />
+      </ThemeProvider>
     </Router>
     
   </React.StrictMode>,

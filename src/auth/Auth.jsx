@@ -1,36 +1,48 @@
 import { useState } from "react";
 import {LoginUser, RegisterUser} from "."
+import { Route, Switch, Redirect, useLocation, useHistory } from "react-router-dom";
 
 
 export default function Auth(props){
-    const {updateToken} = props
-    const [authType, setAuthType] = useState("register")
+    const {token, updateToken} = props
+
 
     return (
-        <div>
-            {
-                authType === "register" ?
-                <>
-                    <button onClick={() => setAuthType("login")}>Already Registered? Login.</button>
-                    <RegisterUser
-                        authType={authType}
-                        setAuthType={setAuthType}
-                    />
-                </>
+        
+            <Switch>
+                {
+                    token 
+                    ?   <>
+                            <Route path="/">
+                                <Redirect to="/app" />
+                            </Route>
+                            <Route path="/app">
+                                <h1>Logged in! Welcome to expense tracker</h1>
+                            </Route>           
+                        </>
+                    :   <>
+                        
 
-                :
-                <>
-                    <button onClick={() => setAuthType("register")}>Not Registered? Register</button>
-                    <LoginUser 
-                        authType={authType}
-                        setAuthType={setAuthType}
-                        updateToken={updateToken}
-                    />
+                        <Route path="/register">
+                            <RegisterUser />
+                        </Route>
 
-                </>
+                        <Route path="/login">
+                            <LoginUser
+                                updateToken={updateToken}
+                            />
+                        </Route>
 
-            }
-            
-        </div>
+                        <Route path="/">
+                            <Redirect to="/register" /> 
+                        </Route>
+
+                        </>
+                }
+
+
+
+
+            </Switch>
     )
 }

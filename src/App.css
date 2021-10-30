@@ -1,6 +1,6 @@
-body {
+/* body {
   color: whitesmoke;
-}
+} */
 
 form {
   display:flex;
@@ -14,17 +14,17 @@ form label {
   flex-direction: column;
   margin: .5rem;
 }
-.App {
+/* .App {
   text-align: center;
-  background-color: #282c34;
-}
+  background-color: #f0f3ff;
+} */
 
-.App-logo {
+/* .App-logo {
   height: 40vmin;
   pointer-events: none;
-}
+} */
 
-.App-header {
+/* .App-header {
   background-color: #485264;
   min-height: 100px;
   display: flex;
@@ -33,7 +33,7 @@ form label {
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
-}
+} */
 
 .App-link {
   color: #61dafb;

@@ -1,5 +1,6 @@
 import { loginUser } from "../helpers";
 import { useState } from "react";
+import { TextField, Button } from "@mui/material";
 
 const loginFormFields = [
     {propName: "email", label: "Email", type: "text"},
@@ -55,19 +56,24 @@ export default function LoginUser(props){
             >
                 {
                     loginFormFields.map((field => (
-                        <label key={field.propName}>
-                            {field.label}
-                            <input 
-                                type={field.type}
-                                name={field.propName}
-                                value={state[field.propName]}
-                                onChange={(e) => handleUpdateInput(e)}
-                            />
-                        </label>
+
+                        <TextField
+                        key={field.propName}
+                        id="outlined-basic"
+                        label={field.label}
+                        variant="outlined"
+                        margin="normal"
+                        type={field.type}
+                        name={field.propName}
+                        value={state[field.propName]}
+                        onChange={(e) => handleUpdateInput(e)}
+                        required
+                    />
+
                         
                     )))
                 }
-                <button type="submit">Login</button>
+                <Button type="submit" variant="contained">Login</Button>
 
             </form>
         </div>
