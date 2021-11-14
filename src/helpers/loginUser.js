@@ -15,9 +15,10 @@ export default async function loginUser(
         })
         const json = await res.json()
         if (res.status === 200) {
+            console.log(await json)
             return await json
         } else {
-            throw new Error(await json.message)
+            throw json
         }
         
     } catch (error) {

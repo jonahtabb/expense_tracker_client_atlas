@@ -1,47 +1,53 @@
-import {registerUser} from '../helpers'
-import { useState } from "react"
-import { FormGroup, TextField, FormControlLabel, Checkbox, Button } from '@mui/material'
+import { registerUser } from "../helpers";
+import { useState } from "react";
+import {
+    FormGroup,
+    TextField,
+    FormControlLabel,
+    Checkbox,
+    Button,
+} from "@mui/material";
 
 const registrationFormFields = [
-    {propName: "firstName", label: "First Name", type: "text"},
-    {propName: "lastName", label: "Last Name", type: "text"},
-    {propName: "email", label: "Email", type: "text"},
-    {propName: "password", label: "Password", type: "text"},
-    {propName: "confirmPassword", label: "Confirm Password", type:"text"},
-    {propName: "acceptTerms", label: "Accept Terms", type:"checkbox" }
-]
-    
-export default function RegisterUser(){
+    { propName: "firstName", label: "First Name", type: "text" },
+    { propName: "lastName", label: "Last Name", type: "text" },
+    { propName: "email", label: "Email", type: "text" },
+    { propName: "password", label: "Password", type: "text" },
+    { propName: "confirmPassword", label: "Confirm Password", type: "text" },
+    { propName: "acceptTerms", label: "Accept Terms", type: "checkbox" },
+];
 
+export default function RegisterUser() {
     const [state, setState] = useState({
         firstName: "",
         lastName: "",
         email: "",
         password: "",
         confirmPassword: "",
-        acceptTerms: true
-    })
+        acceptTerms: false,
+    });
 
     const handleUpdateInput = (e) => {
-        const target = e.target ;
-        const fieldValue = target.type === 'checkbox' ? target.checked : target.value ;
-        const fieldName = target.name ;
-        
+        const target = e.target;
+        const fieldValue =
+            target.type === "checkbox" ? target.checked : target.value;
+        const fieldName = target.name;
+        console.log(`${fieldName} updated ---> ${fieldValue}`);
         setState((prevState) => ({
             ...prevState,
-            [fieldName]: fieldValue
-        }))
-    }
+            [fieldName]: fieldValue,
+        }));
+    };
 
     const handleSubmit = async () => {
         const {
-                firstName,
-                lastName,
-                email,
-                password,
-                confirmPassword,
-                acceptTerms
-        } = state
+            firstName,
+            lastName,
+            email,
+            password,
+            confirmPassword,
+            acceptTerms,
+        } = state;
 
         let res = await registerUser(
             firstName,
@@ -50,8 +56,8 @@ export default function RegisterUser(){
             password,
             confirmPassword,
             acceptTerms
-        )
-        console.log(res)
+        );
+        console.log(res);
 
         setState({
             firstName: "",
@@ -59,20 +65,23 @@ export default function RegisterUser(){
             email: "",
             password: "",
             confirmPassword: "",
-            acceptTerms: false
-        })
-    }
+            acceptTerms: false,
+        });
+    };
 
-    return(
+    return (
         <div className="auth">
             <h2>Register</h2>
-            <form onSubmit={(e) => {e.preventDefault(); handleSubmit(e)} }>
-                {
-                    registrationFormFields.map((field => 
-                    {
-                        if(field.type === "text") {
-                            return(
-                                <TextField
+            <form
+                onSubmit={(e) => {
+                    e.preventDefault();
+                    handleSubmit(e);
+                }}
+            >
+                {registrationFormFields.map((field) => {
+                    if (field.type === "text") {
+                        return (
+                            <TextField
                                 key={field.propName}
                                 id="outlined-basic"
                                 label={field.label}
@@ -84,26 +93,29 @@ export default function RegisterUser(){
                                 onChange={(e) => handleUpdateInput(e)}
                                 required
                             />
-                            )
-                        } else {
-                            return(
-                                <FormGroup key={field.propName}>
-                                    <FormControlLabel 
-                                        control={<Checkbox defaultChecked onClick={(e) => handleUpdateInput(e)}/>} 
-                                        label={field.label}
-                                    />
-                                </FormGroup>
-                            )
-                        }
-
+                        );
+                    } else {
+                        return (
+                            <FormGroup key={field.propName}>
+                                <FormControlLabel
+                                    control={
+                                        <Checkbox
+                                            name={field.propName}
+                                            onClick={(e) =>
+                                                handleUpdateInput(e)
+                                            }
+                                        />
+                                    }
+                                    label={field.label}
+                                />
+                            </FormGroup>
+                        );
                     }
-
-                       
-                    
-                    ))
-                }         
-                <Button type="submit" variant="contained">Register</Button>
+                })}
+                <Button type="submit" variant="contained">
+                    Register
+                </Button>
             </form>
         </div>
-    )
+    );
 }

@@ -14,15 +14,27 @@ import { Header } from "./common";
 
 function App() {
     const [token, setToken] = useState(null);
+    const [userId, setUserId] = useState(null)
+    const [user, setUser] = useState(null);
+
     const { pathname, search } = useLocation();
     let history = useHistory();
+
+    const updateUser = (userData) => {
+        if (userData) {
+            setUser(userData)
+            setUserId(userData.id)
+        }
+    }
+
+    const updateUserId = (userId) => {
+        setUserId(userId)
+    }
 
     const updateToken = () => {
         const token = localStorage.getItem("token");
         if (token) {
             setToken(token);
-        } else {
-          setToken(null)
         }
     };
 
@@ -42,6 +54,12 @@ function App() {
         const localToken = localStorage.getItem("token");
         if (localToken) {
             setToken(localToken);
+
+        }
+
+        const userId = localStorage.getItem("userId")
+        if (userId) {
+            setUserId(userId)
         }
     }, []);
 
@@ -52,7 +70,7 @@ function App() {
             <Switch>
                 <Redirect from="/:url*(/+)" to={pathname.slice(0, -1)} />
                 <Route path="/">
-                    <Auth token={token} updateToken={updateToken} />
+                    <Auth token={token} updateToken={updateToken} updateUser={updateUser} userId={userId} user={user} />
                 </Route>
             </Switch>
         </div>
